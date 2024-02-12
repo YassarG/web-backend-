@@ -15,7 +15,6 @@ model product {
   name      String 
   price     Int
   imageUrl  String
-  date      DateTime @default(now())
   
 
 

@@ -2,7 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const { prisma } = require("./config/prisma");
+const { parse } = require("dotenv");
+const { catalogRoutes } = require("./routes/catalog.routes");
+const { productRoutes } = require("./routes/product.routes");
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
@@ -13,25 +15,14 @@ app.get("/", async (req, res) => {
   res.send("here is the response!");
 });
 
-app.get("/catalogs", async (req, res) => {
-  const catalog = await prisma.catalog.findMany();
-  res.status(200).send(catalog);
-});
-
-// app.use("/products", productRoutes);
-
-app.post("/products/post", async (req, res) => {
-  res.send("ini buat ngepost");
-});
-app.delete("/products/delete", async (req, res) => {
-  res.send("ini buat ngedelete");
-});
-app.put("/products/put", async (req, res) => {
-  res.send("ini buat put");
-});
+// routes
+app.use("/catalogs", catalogRoutes);
+app.use("/products", productRoutes);
 
 app.all("*", async (req, res) => {
-  res.send("server not found!");
+  res.json({
+    message: "Routes you're looking is not found!",
+  });
 });
 
 app.listen(PORT, "0.0.0.0", () => {
