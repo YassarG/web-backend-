@@ -1,6 +1,7 @@
-const express = require("express");
+import express from "express";
+import { prisma } from "../config/prisma";
+
 const catalogRoutes = express.Router();
-const { prisma } = require("../config/prisma");
 
 //get all catalogs
 catalogRoutes.get("/", async (req, res) => {
@@ -63,4 +64,4 @@ catalogRoutes.delete("/:id", async (req, res) => {
   });
 });
 
-module.exports = { catalogRoutes };
+export { catalogRoutes };

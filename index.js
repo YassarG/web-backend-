@@ -1,11 +1,14 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const app = express();
-const { parse } = require("dotenv");
-const { catalogRoutes } = require("./routes/catalog.routes");
-const { productRoutes } = require("./routes/product.routes");
+// require("dotenv").config();
+import express from "express";
+import cors from "cors";
+// const { parse } = require("dotenv");
+import { config } from "dotenv";
+import { catalogRoutes } from "./routes/catalog.routes.js";
+import { productRoutes } from "./routes/product.routes.js";
+
+config();
 const PORT = process.env.PORT || 3000;
+const app = express();
 
 app.use(cors());
 app.use(express.json());
